@@ -126,7 +126,7 @@ body{
     width: 590px;
     height: 450px;
 
-    margin: 15% auto;
+    margin: 20px auto;
 }
 
 footer{
@@ -142,34 +142,21 @@ footer p{
 
 @media screen and (max-width: 600px){
     main{
-        transform: scale(0.8);
+        transform: scale(0.9);
     }
 
     #table{
-        width: 500px;
-        height: 500px;
+        width: 100%;
+        height: fit-content;
         position: absolute;
         left: 50%;
         transform: translate(-50%, 0);
         
     }
+
+    .card-container{
+        margin: 10px 7px;
+    }
     
 }
-@media screen and (max-width: 500px){
-main{
-        transform: scale(0.7);
-    }
 
-}
-@media screen and (max-width: 450px){
-main{
-        transform: scale(0.6);
-    }
-
-}
-@media screen and (max-width: 350px){
-main{
-        transform: scale(0.5);
-    }
-
-}

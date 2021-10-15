@@ -167,10 +167,7 @@ function nivel1() {
       else {
         check(card_container[i])
       }
-  
     })
-  
-
 }
 
 function check(card_container) {

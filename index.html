@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=], initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Memory Card</title>
 </head>
 <body>
@@ -13,19 +14,19 @@
         <section id="load-container">
             <div id="myBarBack">
                 <div id="myBar"></div>
-                <p id="loadText">Load Bar</p>
+                <p id="loadText">Carregando imagens ...</p>
             </div>
         </section>
         <section id="nivel-container">
             <h3>Escolha o Nivel de Jogo</h3>
             <div>
                 <p class="nivel"><button class="nivel-btn" onclick="nivel1()" disabled>20 Cartas</button></p>
-                <p class="nivel"><button class="nivel-btn" onclick="nivel2()" disabled>30 Cartas</button></p>
+                <!-- <p class="nivel"><button class="nivel-btn" onclick="nivel2()" disabled>30 Cartas</button></p> -->
             </div>
         </section>
         <section id="table-container" style="display: none;">
             <!-- Tempo -->
-            <h3>Tempo: <span id="time"></span></h3>
+            <h3><span id="time"></span></h3>
 
             <!-- Table -->
             <div><ul id="table"></ul></div>

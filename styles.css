@@ -62,7 +62,7 @@ body{
 
 /* Table Stuff */
 #table-container{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 #table{
     display: flex;

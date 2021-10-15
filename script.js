@@ -45,12 +45,12 @@ var pics = new Array
 let barLoad = document.getElementById("myBar")
 let loadText = document.getElementById("loadText")
 let nvlBtn = document.querySelectorAll(".nivel-btn")
+let nivel_container = document.getElementById("nivel-container")
 
 window.onload = () => {
   var refreshPicLoad = setInterval(() => {
     // make loader
     let width = Math.floor((((pics.length + 1 / numItemsToGenerate * 100)/2)*10))
-    console.log(width)
     barLoad.style.width = width + '%'
 
     if (width >= 100) {
@@ -63,15 +63,10 @@ window.onload = () => {
 
     }
 
-
-
-
-    
-
     let num = Math.floor(Math.random() * keywords.length)
     let key = keywords[num]
 
-    fetch(`https://source.unsplash.com/1600x900/?${key}`)
+    fetch(`https://source.unsplash.com/800x600/?${key}`)
    .then((response) => {
        pics.push(response.url)
      })
@@ -111,8 +106,12 @@ function oneMore() {
 
 
 function nivel1() {
+  
   let table_container = document.getElementById("table-container")
+  let load_container = document.getElementById("load-container")
 
+  load_container.style.display = "none"
+  nivel_container.style.display = "none"
   table_container.style.display = "block"
 
 

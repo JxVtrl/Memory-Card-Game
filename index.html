@@ -10,40 +10,29 @@
 <body>
     <main>
         <!-- LOAD SECTION -->
-        <section>
+        <section id="load-container">
             <div id="myBarBack">
                 <div id="myBar"></div>
                 <p id="loadText">Load Bar</p>
             </div>
-
-
         </section>
-
-
-        <section>
+        <section id="nivel-container">
             <h3>Escolha o Nivel de Jogo</h3>
             <div>
-                <p class="nivel" ><button class="nivel-btn" onclick="nivel1()" disabled>20 Cartas</button></p>
-                <p class="nivel" ><button class="nivel-btn"  onclick="nivel2()" disabled>30 Cartas</button></p>
-                
+                <p class="nivel"><button class="nivel-btn" onclick="nivel1()" disabled>20 Cartas</button></p>
+                <p class="nivel"><button class="nivel-btn" onclick="nivel2()" disabled>30 Cartas</button></p>
             </div>
         </section>
         <section id="table-container" style="display: none;">
+            <!-- Tempo -->
             <h3>Tempo: <span id="time"></span></h3>
-            <div>
-                <ul id="table"></ul>
-            </div>
+
+            <!-- Table -->
+            <div><ul id="table"></ul></div>
         </section>
-
-
-
-
     </main>
 
-
-
-
-
+    <footer><p>Feito com carinho por: João Vinicius Lamarca</p></footer>
 
     <script src="script.js"></script>
 </body>

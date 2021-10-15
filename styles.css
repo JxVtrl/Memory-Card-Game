@@ -12,6 +12,41 @@ body{
     text-align: center;
 }
 
+@media screen and (max-width: 600px){
+    main{
+        transform: scale(0.8);
+    }
+
+    #table{
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        
+    }
+    
+}
+
+@media screen and (max-width: 500px){
+main{
+        transform: scale(0.7);
+    }
+
+}
+
+@media screen and (max-width: 450px){
+main{
+        transform: scale(0.6);
+    }
+
+}
+
+@media screen and (max-width: 350px){
+main{
+        transform: scale(0.5);
+    }
+
+}
+
 
 #myBarBack{
     width: 300px;
@@ -82,7 +117,7 @@ body{
     height: 100%;
     object-fit: cover;
     
-
+    border-radius: 5px;
 }
 
 .back{
@@ -96,6 +131,7 @@ body{
     cursor: pointer;
     margin: 5px;
 
+    
 }
 
 .card{
@@ -106,6 +142,8 @@ body{
 
     transition: transform 0.8s;
     transform-style: preserve-3d;
+
+    
 }
 
 .card:hover{
@@ -127,4 +165,17 @@ body{
     height: 450px;
 
     margin: auto;
+}
+
+footer{
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
+}
+
+
+footer p{
+    text-align: center;
+    font-size: 12px;
+    color: #666666;
 }

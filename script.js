@@ -37,9 +37,6 @@ var keywords = [
   "forest"
 ]
 
-// Quantas cartas serão geradas antes de escolher um nivel de jogo (Recomendado: 15)
-const numItemsToGenerate = 15;
-
 var table = document.getElementById("table")
 let barLoad = document.getElementById("myBar")
 let loadText = document.getElementById("loadText")
@@ -49,12 +46,15 @@ let nivel_container = document.getElementById("nivel-container")
 let table_container = document.getElementById("table-container")
 let load_container = document.getElementById("load-container")
 
-let cards = document.querySelectorAll(".card")
 var pics = new Array
 
+// Quantas cartas serão geradas antes de escolher um nivel de jogo (Recomendado: 15)
+const numItemsToGenerate = 15;
 
+
+
+// Get Images //
 window.onload = () => {
-  
   var refreshPicLoad = setInterval(() => {
     loader(refreshPicLoad)
 
@@ -66,7 +66,7 @@ window.onload = () => {
     
   }, 1500)
 }
-
+// lOAD BAR // 
 function loader(refreshPicLoad) {
   let width = Math.floor((((pics.length + 1 / numItemsToGenerate * 100)/2)*10))
   barLoad.style.width = width + '%'
@@ -82,6 +82,9 @@ function loader(refreshPicLoad) {
   }
 }
 
+
+
+// Find keyword //
 function key() {
   let num = Math.floor(Math.random() * keywords.length)
   let key = keywords[num]
@@ -90,15 +93,15 @@ function key() {
 }
   
 
-
+var timer
+// Time and Format //
 function startTimer() {
   var time = 0;
-  var timer = setInterval(() => {
+  timer = setInterval(() => {
     time++;
     document.getElementById("time").innerHTML = formatTime(time);
   }, 1000);
 }
-
 function formatTime(time) {
   let minutes = Math.floor(time / 60)
   let seconds = time - minutes * 60
@@ -112,6 +115,28 @@ function formatTime(time) {
   return `${minutes}:${seconds}`
 }
 
+
+
+// Level 1 //
+function nivel1() {
+  table.innerHTML = ''
+  let selected = []
+  
+  load_container.style.display = "none"
+  nivel_container.style.display = "none"
+  table_container.style.display = "block"
+  
+  // start Timer
+  startTimer()
+  
+  // render cards
+  render(selected)
+
+  // Add listeners
+  listen()
+}
+
+// Render Cards //
 function render(selected) {
   // select 10 cards to duplicate
   let cardsNumber = 10
@@ -142,88 +167,75 @@ function render(selected) {
       </li>`
 }
 
-
-function nivel1() {
-  table.innerHTML = ''
-  let selected = []
-  
-  load_container.style.display = "none"
-  nivel_container.style.display = "none"
-  table_container.style.display = "block"
-  
-  
-  // start Timer
-  startTimer()
-  
-  // render cards
-  render(selected)
+// Add Listeners //
+function listen() {
   let card_container = document.querySelectorAll(".card-container")
-  console.log(card_container)
 
   for (let i = 0; i < card_container.length; i++)
-    card_container[i].addEventListener("click", () => {
-      if(card_container[i].classList.contains("flipped"))
-        return
-      else {
-        check(card_container[i])
-      }
-    })
+    card_container[i].addEventListener("click", cardClick)      
 }
 
-function check(card_container) {
-  let flipped = document.querySelectorAll(".flipped")
-  let matched = document.querySelectorAll(".matched")
-  let cardsNumber = 20
-  let carta1 
-  let carta2
-  let img1
-  let img2
-
-  // verificar quantas cartas estao viradas
-  if(flipped.length < 2) {
-    card_container.children[0].children[0].style.zIndex = "0"
-    card_container.classList.add("flipped")
-  }
-
-  if (flipped.length == 2) {
-    carta1 = flipped[0]
-    carta2 = flipped[1]
-
-    img1 = carta1.querySelector(".img").src
-    img2 = carta2.querySelector(".img").src
-
-    // verificar se as cartas sao iguais
-    if (img1 == img2) {
-      carta1.classList.add("matched")
-      carta2.classList.add("matched")
-
-      // remover cartas viradas
-      carta1.classList.remove("flipped")
-      carta2.classList.remove("flipped")
+// Card Click Function //
+function cardClick(e) {
+  let card = e.target.parentElement.parentElement.parentElement
+  let congrats = document.getElementById("congrats")
+  let flippeds = document.querySelectorAll(".flipped")
+  let fLength = flippeds.length
   
-      carta1.style.border = "1px solid green"
-      carta2.style.border = "1px solid green"
+  let carta1 = null 
+  let carta2 = null 
+  let img1 = null 
+  let img2 = null 
+  let cardsNumber = 20
+
+  if(card.classList.contains("flipped"))
+        return
+  else {
+    if (fLength == 0) {
+      card.classList.add("flipped")
+    }
+    else if (fLength == 1) {
+      card.classList.add("flipped")
+      flippeds = document.querySelectorAll(".flipped")
+
+      carta1 = flippeds[0]
+      carta2 = flippeds[1]
+
+      img1 = carta1.children[0].children[1].children[0]
+      img2 = carta2.children[0].children[1].children[0]
 
       setTimeout(() => {
-        carta1.style.border = "none"
-        carta2.style.border = "none"
-      }, 3000);
-
-      console.log(matched.length)
-  
-      // if all matched cards
-      if (matched.length == cardsNumber) {
-        clearInterval(timer)
-        matched.forEach(card => card.classList.remove("matched"))
-        alert("Você venceu!")
-      }
-    } else {
-      // voltar cartas para o estado inicial
-      carta1.children[0].children[0].style.zIndex = "1"
-      carta2.children[0].children[0].style.zIndex = "1"
-      carta1.classList.remove("flipped")
-      carta2.classList.remove("flipped")
-      
+        if (img1.src !== img2.src) {
+          carta1.classList.remove("flipped")
+          carta2.classList.remove("flipped")
+          img1.style.border = "none"
+          img2.style.border = "none"
+        }
+        else {
+          img1.style.border = "2px solid green"
+          img2.style.border = "2px solid green"
+          
+          setTimeout(() => {
+            carta1.classList.remove("flipped")
+            carta2.classList.remove("flipped") 
+            
+            carta1.classList.add("matched")
+            carta2.classList.add("matched")
+            
+            let matched = document.querySelectorAll(".matched")
+            
+            if (matched.length == cardsNumber) {
+              clearInterval(timer)
+              matched.forEach(card => {
+                card.classList.remove("matched")
+                card.classList.add("flipped")
+              })
+              congrats.innerHTML = `Parabéns, Você Venceu!`
+            }
+          }, 300);
+        }
+      }, 800);
     }
   }
 }
+    

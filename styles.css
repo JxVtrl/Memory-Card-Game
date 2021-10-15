@@ -12,39 +12,6 @@ body{
     text-align: center;
 }
 
-@media screen and (max-width: 600px){
-    main{
-        transform: scale(0.8);
-    }
-
-    #table{
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 0);
-        
-    }
-    
-}
-@media screen and (max-width: 500px){
-main{
-        transform: scale(0.7);
-    }
-
-}
-@media screen and (max-width: 450px){
-main{
-        transform: scale(0.6);
-    }
-
-}
-@media screen and (max-width: 350px){
-main{
-        transform: scale(0.5);
-    }
-
-}
-
-
 #myBarBack{
     width: 300px;
     height: 18px;
@@ -171,4 +138,38 @@ footer p{
     text-align: center;
     font-size: 12px;
     color: #666666;
+}
+
+@media screen and (max-width: 600px){
+    main{
+        transform: scale(0.8);
+    }
+
+    #table{
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+        
+    }
+    
+}
+@media screen and (max-width: 500px){
+main{
+        transform: scale(0.7);
+    }
+
+}
+@media screen and (max-width: 450px){
+main{
+        transform: scale(0.6);
+    }
+
+}
+@media screen and (max-width: 350px){
+main{
+        transform: scale(0.5);
+    }
+
 }

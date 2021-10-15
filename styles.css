@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+html{
+    overflow: hidden;
+}
+
 body{
     font-family: 'Poppins','Roboto', sans-serif;
     background: #f5f5f5;

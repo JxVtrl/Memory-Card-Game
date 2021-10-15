@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins','Roboto', sans-serif;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+
+#myBarBack{
+    width: 300px;
+    height: 18px;
+    background: #666666;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    overflow: hidden;
+}
+
+#loadText{
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    margin-left: 5px;
+    text-align: center;
+    z-index: 3;
+    position: absolute;
+    font-weight: 600;
+}
+
+#myBar{
+    background: #00ff00;
+}
+
+
+
+.nivel{
+    cursor: pointer;
+    background-color: antiquewhite;
+    width: fit-content;
+    margin: 10px auto;
+    padding: 2px 5px;
+    border-radius: 5px;
+
+    transition: all 0.3s ease;
+}
+
+.nivel:hover{
+    background-color: #f5f5f5;
+
+}
+
+.nivel-btn{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.switch{
+	display: none;
+}
+
+.card-container:hover .card {
+  transform: rotateY(180deg);
+}
+
+.back, .front{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+.cardBack, .img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+
+}
+
+.back{
+    transform: rotateY(180deg);
+}
+
+.card-container{
+    width: 100px;
+    height: 100px;
+    perspective: 1000px;
+    cursor: pointer;
+    margin: 5px;
+
+}
+
+.card{
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    position: relative;
+
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    
+}
+
+
+.btnControl {
+    display: none;
+}
+
+#table{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    width: 590px;
+    height: 450px;
+
+    margin: auto;
+}

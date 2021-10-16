@@ -10,21 +10,37 @@
     <title>Memory Card</title>
 </head>
 <body>
-    <main>
+    <header>
         <!-- LOAD SECTION -->
-        <section id="load-container">
-            <div id="myBarBack">
+        <div id="load-container">
+             <div id="myBarBack">
                 <div id="myBar"></div>
                 <p id="loadText">Carregando imagens ...</p>
             </div>
+        </div>
+    </header>
+    <main>
+        
+        <section id="checkIn-container">
+            <h3>Registre seu resultado</h3>
+            <div id="input-container">
+                <input type="text" maxlength="4" placeholder="😁 Max. 4" id="nameInput">
+                <input type="button" value="Enviar" onclick="enviar()" id="nameBtn">
+            </div>
+
         </section>
-        <section id="nivel-container">
+
+
+        <section id="nivel-container" style="display: none;">
             <h3 id="congrats">Escolha o Nivel de Jogo</h3>
             <div>
                 <p class="nivel"><button class="nivel-btn" onclick="nivel1()" disabled>20 Cartas</button></p>
                 <!-- <p class="nivel"><button class="nivel-btn" onclick="nivel2()" disabled>30 Cartas</button></p> -->
             </div>
         </section>
+
+
+
         <section id="table-container" style="display: none;">
             <!-- Tempo -->
             <h3><span id="time"></span></h3>

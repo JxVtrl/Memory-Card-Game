@@ -167,8 +167,10 @@ function addLeaders(doc) {
   let temp = doc.sort((a, b) => {
     return a.time - b.time
   })
-  for (let i = 0; i < 10; i++) {
-    leaders.innerHTML += `<li>${i+1}. <span>${temp[i].name} - ${temp[i].time}s</span></li>`
+  for (let i = 0; i < temp.length; i++) {
+    if (i < 10) {
+      leaders.innerHTML += `<li>${i+1}. <span>${temp[i].name} - ${temp[i].time}s</span></li>`
+    }
 
   }
 }

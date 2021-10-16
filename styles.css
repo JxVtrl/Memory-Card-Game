@@ -77,10 +77,9 @@ body{
 }
 
 .hide{
-    animation: yhide 0.5s ease-in-out forwards;
+    animation: xhide 0.5s ease-in-out forwards;
 }
-
-@keyframes yhide {
+@keyframes xhide {
     0% {
         transform: translateX(0);
     }
@@ -88,6 +87,20 @@ body{
         transform: translateX(-200px);
     }
 }
+
+.show{
+    animation: xshow 0.5s ease-in-out forwards;
+}
+
+@keyframes xshow {
+    0% {
+        transform: translateX(-200px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 
 
 

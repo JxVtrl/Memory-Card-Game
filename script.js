@@ -43,10 +43,12 @@ let leader_section = document.getElementById("leader-section")
 
 leaderboard_container.addEventListener('click', () => {
   if (leader_section.classList.contains('hide')) {
-     leader_section.classList.remove('hide')
+    leader_section.classList.remove('hide')
+    leader_section.classList.add('show')
   }
   else {
     leader_section.classList.add('hide')
+    leader_section.classList.remove('show')
   }
 })
  

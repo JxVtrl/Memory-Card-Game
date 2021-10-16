@@ -37,11 +37,26 @@ var keywords = [
   "forest"
 ]
 
+// Leaderboard //
+let leaderboard_container = document.getElementById("open-leader")
+let leader_section = document.getElementById("leader-section")
+
+leaderboard_container.addEventListener('click', () => {
+  if (leader_section.classList.contains('hide')) {
+     leader_section.classList.remove('hide')
+  }
+  else {
+    leader_section.classList.add('hide')
+  }
+})
+ 
+
 var table = document.getElementById("table")
 let barLoad = document.getElementById("myBar")
 let loadText = document.getElementById("loadText")
 let nvlBtn = document.querySelectorAll(".nivel-btn")
 
+let checkin_container = document.getElementById("checkIn-container")
 let nivel_container = document.getElementById("nivel-container")
 let table_container = document.getElementById("table-container")
 let load_container = document.getElementById("load-container")
@@ -50,8 +65,6 @@ var pics = new Array
 
 // Quantas cartas serão geradas antes de escolher um nivel de jogo (Recomendado: 15)
 const numItemsToGenerate = 15;
-
-
 
 // Get Images //
 window.onload = () => {
@@ -82,6 +95,83 @@ function loader(refreshPicLoad) {
   }
 }
 
+const dbConfig = {
+  apiKey: "AIzaSyBxWs1WqlmBIjKX97HLhaMZH4ZcQlGRen8",
+  authDomain: "memory-card-329202.firebaseapp.com",
+  databaseURL: "https://memory-card-329202-default-rtdb.firebaseio.com",
+  projectId: "memory-card-329202",
+  storageBucket: "memory-card-329202.appspot.com",
+  messagingSenderId: "310012326291",
+  appId: "1:310012326291:web:c4068345be2d59d704f866",
+};
+
+firebase.initializeApp(dbConfig);
+let db = firebase.firestore()
+
+// Input Name // 
+function enviar() {
+  let name = document.getElementById("nameInput").value
+  if (name.length == 3) {
+    nivel_container.style.display = "block"
+    checkin_container.style.display = "none"
+
+    addName(name) 
+  }
+}
+// Add Name on DB and LocalStorage //
+function addName(name) {
+  db.collection("users").add({
+    name: name,
+  })
+    .then((docRef) => {
+      localStorage.setItem("id", docRef.id)
+
+      db.collection("users").doc(docRef.id).update({
+      id: docRef.id,
+    })
+
+
+    })
+    .catch((error) => {
+      console.error("Error adding document: ", error);
+    })
+  
+}
+
+
+  
+getLeaders()
+async function getLeaders() {
+  const events = await db.collection('users')
+  events.get().then((querySnapshot) => {
+      const tempDoc = querySnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() }
+      })
+    checkLeaders(tempDoc)
+  })
+}
+
+function checkLeaders(doc) {
+  for (let i = 0; i < doc.length; i++) {
+    if (doc[i].time == null) {
+     //remove document from db
+      let id = doc[i].id
+      db.collection("users").doc(id).delete()
+   }
+  }
+  addLeaders(doc)
+}
+
+function addLeaders(doc) {
+  let leaders = document.getElementById("leaders")
+  let temp = doc.sort((a, b) => {
+    return a.time - b.time
+  })
+  for (let i = 0; i < 10; i++) {
+    leaders.innerHTML += `<li>${i+1}. <span>${temp[i].name} - ${temp[i].time}s</span></li>`
+
+  }
+}
 
 
 // Find keyword //
@@ -91,10 +181,11 @@ function key() {
   
   return key
 }
-  
 
-var timer
+
+
 // Time and Format //
+var timer
 function startTimer() {
   var time = 0;
   timer = setInterval(() => {
@@ -114,11 +205,6 @@ function formatTime(time) {
 
   return `${minutes}:${seconds}`
 }
-
-function enviar() {
-  
-}
-
 
 
 // Level 1 //
@@ -229,17 +315,42 @@ function cardClick(e) {
             let matched = document.querySelectorAll(".matched")
             
             if (matched.length == cardsNumber) {
+              congrats.innerHTML = `Parabéns, Você Venceu!`
+
               clearInterval(timer)
+              
+              saveTime()
+              
               matched.forEach(card => {
                 card.classList.remove("matched")
                 card.classList.add("flipped")
               })
-              congrats.innerHTML = `Parabéns, Você Venceu!`
+              
+              setTimeout(location.reload(), 3000)
             }
           }, 300);
         }
       }, 800);
     }
   }
+}
+
+// Save Time in DB // 
+function saveTime() {
+  let tempo = document.getElementById("time").innerHTML
+  let minutos = Number(tempo.split(":")[0])
+  let segundos = Number(tempo.split(":")[1])
+  if (minutos > 0) {
+    segundos += minutos * 60
+  }
+
+  console.log(segundos)
+
+  let id = localStorage.getItem("id")
+
+
+  db.collection("users").doc(id).update({
+    time: segundos
+  })
 }
     

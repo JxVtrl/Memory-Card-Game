@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Memory Card</title>
@@ -20,12 +21,24 @@
         </div>
     </header>
     <main>
+
+        <section id="leader-container">
+            <section id="open-leader">
+                🏆
+            </section>
+            <section id="leader-section" class="hide">
+                <h4> Leaderboard</h4>
+                <ul id="leaders">
+                </ul>
+            </section>
+
+        </section>
+
         
         <section id="checkIn-container">
             <h3>Registre seu resultado</h3>
             <div id="input-container">
-                <input type="text" maxlength="4" placeholder="😁 Max. 4" id="nameInput">
-                <input type="button" value="Enviar" onclick="enviar()" id="nameBtn">
+                <input type="text" maxlength="3" placeholder="Max. 3" id="nameInput" oninput="enviar(this.value)">
             </div>
 
         </section>
@@ -52,7 +65,9 @@
 
     <footer><p>Feito com carinho por: João Vinicius Lamarca 💘</p></footer>
 
-
+    <script src="https://unpkg.com/boxicons@2.0.9/dist/boxicons.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/8.0/firebase.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> 
     <script src="script.js"></script>
 </body>
 </html>
